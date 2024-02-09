@@ -1,38 +1,31 @@
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: petstore
-  description: The petstore API
+  name: account-management
+  description: The uidam accounts API
   tags:
-    - store
+    - uidam
     - rest
-  links:
-    - url: https://github.com/swagger-api/swagger-petstore
-      title: GitHub Repo
-      icon: github
-    - url: https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v3.0/petstore.yaml
-      title: API Spec
-      icon: code
 spec:
   type: openapi
   lifecycle: experimental
-  owner: analytics
+  owner: ignite-core-grouop
   definition: |
     openapi: "3.0.0"
     info:
       version: 1.0.0
-      title: Swagger Petstore
+      title: Swagger Account Management
       license:
         name: MIT
     servers:
-      - url: http://petstore.swagger.io/v1
+      - url: http://uidam.swagger.io/v1
     paths:
-      /pets:
+      /accounts/:
         get:
-          summary: List all pets
-          operationId: listPets
+          summary: List all accounts
+          operationId: listAccounts
           tags:
-            - pets
+            - accounts
           parameters:
             - name: limit
               in: query
@@ -43,7 +36,7 @@ spec:
                 format: int32
           responses:
             '200':
-              description: A paged array of pets
+              description: A paged array of accounts
               headers:
                 x-next:
                   description: A link to the next page of responses
@@ -52,7 +45,7 @@ spec:
               content:
                 application/json:
                   schema:
-                    $ref: "#/components/schemas/Pets"
+                    $ref: "#/components/schemas/Account"
             default:
               description: unexpected error
               content:
@@ -60,10 +53,10 @@ spec:
                   schema:
                     $ref: "#/components/schemas/Error"
         post:
-          summary: Create a pet
-          operationId: createPets
+          summary: Create a account
+          operationId: createAccounts
           tags:
-            - pets
+            - accounts
           responses:
             '201':
               description: Null response
@@ -73,17 +66,17 @@ spec:
                 application/json:
                   schema:
                     $ref: "#/components/schemas/Error"
-      /pets/{petId}:
+      /accounts/{accountId}:
         get:
-          summary: Info for a specific pet
-          operationId: showPetById
+          summary: Info for a specific account
+          operationId: showByAccountId
           tags:
-            - pets
+            - accounts
           parameters:
-            - name: petId
+            - name: accountId
               in: path
               required: true
-              description: The id of the pet to retrieve
+              description: The id of the account to retrieve
               schema:
                 type: string
           responses:
@@ -92,7 +85,7 @@ spec:
               content:
                 application/json:
                   schema:
-                    $ref: "#/components/schemas/Pet"
+                    $ref: "#/components/schemas/Account"
             default:
               description: unexpected error
               content:
@@ -101,7 +94,7 @@ spec:
                     $ref: "#/components/schemas/Error"
     components:
       schemas:
-        Pet:
+        Account:
           type: object
           required:
             - id
@@ -114,10 +107,10 @@ spec:
               type: string
             tag:
               type: string
-        Pets:
+        Accounts:
           type: array
           items:
-            $ref: "#/components/schemas/Pet"
+            $ref: "#/components/schemas/Account"
         Error:
           type: object
           required:
