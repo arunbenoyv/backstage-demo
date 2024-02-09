@@ -9,7 +9,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: experimental
-  owner: ignite-core-grouop
+  owner: ignite-core-group
   definition: |
     openapi: "3.0.0"
     info:
